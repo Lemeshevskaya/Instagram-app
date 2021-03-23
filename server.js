@@ -10,7 +10,7 @@ mongoose
   .then(() => console.log('Mongodb connected'))
   .catch(err => console.log(err))
 
-//First route Test
+//First route 
 app.get('/', (req, res) => res.send('Hello'));
 
 const port = 8000;
