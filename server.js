@@ -19,6 +19,6 @@ app.get('/', (req, res) => res.send('Hello'));
 app.use('/api/users', users);
 app.use('/api/profile', profile);
 app.use('/api/posts', posts);
-
-const port = 8000;
+//changed port no. 8000 t0 9000
+const port = 9000;
 app.listen(port, () => console.log(`Server is running on port ${port}`));
