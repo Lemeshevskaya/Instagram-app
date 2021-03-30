@@ -7,7 +7,7 @@ module.exports = function validateLoginInput(data){
  
  if (isEmpty(data.email)){
   errors.email = 'Email field is required';
-}
+} 
 
  if (!Validator.isEmail(data.email)){
    errors.email = 'Email is invalid';
