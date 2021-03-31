@@ -22,7 +22,7 @@ router.post(
     const profileFields = {};
     profileFields.user = req.user.id;
     if (req.body.username) profileFields.username = req.body.username;
-    if (req.body.website) profileFields.handle = req.body.website;
+    if (req.body.website) profileFields.website = req.body.website;
     if (req.body.bio) profileFields.bio = req.body.bio;
     if (req.body.phonenumber) profileFields.phonenumber = req.body.phonenumber;
     if (req.body.gender)
