@@ -88,8 +88,6 @@ router.get("/all", (req, res) => {
     .catch((err) => res.status(404).json(err));
   });
 
-
-
 // @route   POST api/profile
 // @desc    create or edit users profile
 // @access  Private
@@ -144,7 +142,7 @@ router.post(
 // @route   DELETE api/profile
 // @desc    Delete user and profile
 // @access  Private
-router.delete(
+  router.delete(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
@@ -155,5 +153,102 @@ router.delete(
     })
   }
 )
+
+// @route   POST api/profile/follow/:profile_id
+// @desc    Follow profile
+// @access  Private
+  router.post(
+  "/follow/:profile_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findById(req.params.profile_id)
+        .then((profile) => {
+          if (!profile) {
+            return res.status(404).json({noprofile: "No profile found"})
+          }
+          if (
+            profile.followers.filter((follow) => follow.user.toString() === req.user.id)
+              .length > 0
+          ) {
+            return res
+              .status(400)
+              .json({ alreadyfollowed: "User already follows this profile" });
+          }
+          User.findById(profile.user)
+          .then((otherUser) => {
+              Profile.findOne({ user: req.user.id }).then((myProfile) => {
+                 const newFollow = {
+                  user: profile.user,
+                  name: otherUser.name,
+                  avatar: otherUser.avatar,
+                  username: profile.username,
+                  profile: profile._id
+                };
+                myProfile.following.unshift(newFollow); 
+                //add to array the following user detail
+                const newFollower = {
+                  user: req.user.id,
+                  name: req.user.name,
+                  avatar: req.user.avatar,
+                  username: myProfile.username,
+                  profile: myProfile._id
+                };
+                profile.followers.unshift(newFollower);
+                profile.save();
+                //save followers and following to myprofile
+                myProfile
+                  .save()
+                  .then((myProfile) =>
+                    res.json([
+                      { following: myProfile.following },
+                      { followers: profile.followers },
+                    ])
+                  )
+              })
+            })
+            .catch((err) => {
+            console.log(err);
+              res.status(404).json({ profilenotfound: "No profile found with this profile_id" })
+            });
+    })
+  }
+)   
+// @route   POST api/profile/unfollow/:profile_id
+// @desc    Unfollow profile
+// @access  Private
+
+ router.post(
+'/unfollow/:profile_id',
+ passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findById(req.params.profile_id).then((profile) => {
+    if (!profile) {
+      return res.status(404).json({noprofile: "No profile found"});
+    }
+    //check if profile is followed by user or not
+    if (profile.followers.filter(follower => follower.user.toString() === req.user.id).length === 0) {
+      return res.status(400).json({ msg: 'You have not yet followed this profile' });
+    }
+   // Get remove index [followers from other user] 
+    const removeIndex1 = profile.followers.map(follower => follower.user.toString()).indexOf(req.user.id);
+    // Splice out of array
+    profile.followers.splice(removeIndex1, 1);
+     // Save
+    profile.save().then(profile => console.log(profile.followers));
+      //check myprofile
+    Profile.findOne({ user: req.user.id }).then((myProfile) => {
+    // Get remove index [following from myprofile] 
+    const removeIndex2 = myProfile.following.map(follow => follow.user.toString()).indexOf(profile.user);
+    //splice out of array
+    myProfile.following.splice(removeIndex2, 1);
+    //save profile
+    myProfile.save().then(myProfile => res.json({msg: 'You have unfollowed this person'}))
+    })
+    .catch((err) => {
+      console.error(err.message);
+      res.status(404).json({ profilenotfound: "No profile found" })
+    })
+  })
+})
 //export
 module.exports = router;
