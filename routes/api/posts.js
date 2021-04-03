@@ -37,8 +37,6 @@ router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Profile.findOne({user: req.user.id})
-      .then(profile => {
         const newPost = new Post({
           text: req.body.text,
           image: req.body.image,
@@ -50,7 +48,6 @@ router.post(
         .then(post => {
           return res.json(post);
         })
-      })
 })
 
 // @route   POST api/posts/like/:idpost
@@ -149,21 +146,21 @@ router.post(
   '/comment/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-
+  
 
     Post.findById(req.params.id)
       .then(post => {
         const newComment = {
           text: req.body.text,
-          username: req.body.username,
-          avatar: req.body.avatar,
+          name: req.user.name,
+          avatar: req.user.avatar,
           user: req.user.id
         };
 
         // Add to comments array
         post.comments.unshift(newComment);
 
-        // Save comments
+        // Save
         post.save().then(post => res.json(post));
       })
       .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
