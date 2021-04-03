@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
-
+const User = require('../../models/User');
 // Post model
 const Post = require('../../models/Post');
 // Profile model
@@ -37,21 +37,21 @@ router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-  
-    const newPost = new Post({
-      user: req.user.id,
-      username: req.body.username,
-      avatar: req.body.avatar,
-      image: req.body.image,
-      text: req.body.text,
-      location: req.body.location,
-      Date: req.body.date
-    });
-
-    newPost.save().then(post => res.json(post));
-   }
-  );
-
+    Profile.findOne({user: req.user.id})
+      .then(profile => {
+        const newPost = new Post({
+          text: req.body.text,
+          image: req.body.image,
+          user: req.user.id,
+          name: req.user.name,
+          avatar: req.user.avatar,
+        });
+        newPost.save()
+        .then(post => {
+          return res.json(post);
+        })
+      })
+})
 
 // @route   POST api/posts/like/:idpost
 // @desc    Like post
