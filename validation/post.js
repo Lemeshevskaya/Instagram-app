@@ -18,5 +18,5 @@ if(!Validator.isLength(data.text, {min:5, max:300})){
    return{
     errors,
     isValid: isEmpty(errors)
-  }
-}
+  };
+};
