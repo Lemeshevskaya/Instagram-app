@@ -6,6 +6,8 @@ const Profile = require("../../models/Profile");
 // Load User Model
 const User = require("../../models/User");
 const router = express.Router();
+// Load Validation
+const validateProfileInput = require("../../validation/profile");
 
 // @route   GET api/profile
 // @desc    Get current users profile
@@ -70,7 +72,7 @@ router.get("/all", (req, res) => {
 })
 
 // @route   GET api/profile/username/:username
-// @desc    Get profile by handle
+// @desc    Get profile by username
 // @access  Public
   router.get("/username/:username", (req, res) => {
   const errors = {};
@@ -95,10 +97,15 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const errors = {};
-    //Validation
-
-
+    
+     //validations
+    const { errors, isValid } = validateProfileInput(req.body);
+    // Check Validation
+    if (!isValid) {
+      // Return any errors with 400 status
+      return res.status(400).json(errors);
+    }
+    //end of validation
     //Get data
     const profileFields = {};
     profileFields.user = req.user.id;
