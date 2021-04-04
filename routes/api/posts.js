@@ -7,8 +7,7 @@ const User = require('../../models/User');
 const Post = require('../../models/Post');
 // Profile model
 const Profile = require('../../models/Profile');
-// Load Validation
-const validatePostInput = require("../../validation/post");
+
 
 // @route   GET api/posts
 // @desc    Get posts
@@ -38,7 +37,6 @@ router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-
         const newPost = new Post({
           text: req.body.text,
           image: req.body.image,
@@ -50,7 +48,7 @@ router.post(
         .then(post => {
           return res.json(post);
         })
-
+})
 
 // @route   POST api/posts/like/:idpost
 // @desc    Like post
@@ -148,6 +146,7 @@ router.post(
   '/comment/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
+  
 
     Post.findById(req.params.id)
       .then(post => {
@@ -201,5 +200,6 @@ router.delete(
       .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
   }
 );
+
 
 module.exports = router;
