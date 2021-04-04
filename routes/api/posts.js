@@ -38,13 +38,7 @@ router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    const { errors, isValid } = validatePostInput(req.body);
-    // Check Validation
-    if (!isValid) {
-      // If any errors, send 400 with errors object
-      return res.status(400).json(errors);
-    }
-     //create post
+
         const newPost = new Post({
           text: req.body.text,
           image: req.body.image,
@@ -56,7 +50,7 @@ router.post(
         .then(post => {
           return res.json(post);
         })
-      })
+
 
 // @route   POST api/posts/like/:idpost
 // @desc    Like post
@@ -154,32 +148,27 @@ router.post(
   '/comment/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    const { errors, isValid } = validatePostInput(req.body);
-    // Check Validation
-    if (!isValid) {
-      // If any errors, send 400 with errors object
-      return res.status(400).json(errors);
-    }
+
     Post.findById(req.params.id)
       .then(post => {
         const newComment = {
           text: req.body.text,
-          username: req.body.username,
-          avatar: req.body.avatar,
+          name: req.user.name,
+          avatar: req.user.avatar,
           user: req.user.id
         };
 
         // Add to comments array
         post.comments.unshift(newComment);
 
-        // Save comments
+        // Save
         post.save().then(post => res.json(post));
       })
       .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
   }
 );
 
-// @route   DELETE api/posts/comment/:id/:comment_id
+// @route   DELETE api/posts/comment/:idpost/:comment_id
 // @desc    Remove comment from post
 // @access  Private
 router.delete(
