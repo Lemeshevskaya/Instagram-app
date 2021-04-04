@@ -14,7 +14,8 @@ const ProfileSchema = new Schema ({
     type: String
   },
   bio: {
-    type: String
+    type: String,
+    require: true
   },
   phonenumber: {
     type: String

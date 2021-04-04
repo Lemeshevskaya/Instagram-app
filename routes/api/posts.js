@@ -7,7 +7,8 @@ const User = require('../../models/User');
 const Post = require('../../models/Post');
 // Profile model
 const Profile = require('../../models/Profile');
-
+// Load Validation
+const validatePostInput = require("../../validation/post");
 
 // @route   GET api/posts
 // @desc    Get posts
@@ -37,8 +38,13 @@ router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Profile.findOne({user: req.user.id})
-      .then(profile => {
+    const { errors, isValid } = validatePostInput(req.body);
+    // Check Validation
+    if (!isValid) {
+      // If any errors, send 400 with errors object
+      return res.status(400).json(errors);
+    }
+     //create post
         const newPost = new Post({
           text: req.body.text,
           image: req.body.image,
@@ -51,7 +57,6 @@ router.post(
           return res.json(post);
         })
       })
-})
 
 // @route   POST api/posts/like/:idpost
 // @desc    Like post
@@ -149,8 +154,12 @@ router.post(
   '/comment/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-
-
+    const { errors, isValid } = validatePostInput(req.body);
+    // Check Validation
+    if (!isValid) {
+      // If any errors, send 400 with errors object
+      return res.status(400).json(errors);
+    }
     Post.findById(req.params.id)
       .then(post => {
         const newComment = {
@@ -203,6 +212,5 @@ router.delete(
       .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
   }
 );
-
 
 module.exports = router;
