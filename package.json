@@ -7,7 +7,7 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
-    "inst":  "concurrently \"npm run server\" \"npm run client\" "
+    "inst": "concurrently \"npm run server\" \"npm run client\" "
   },
   "author": "KalAcademy9 team2",
   "license": "ISC",
