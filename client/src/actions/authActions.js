@@ -1,8 +1,8 @@
 import axios from 'axios';
-import {SET_CURRENT_USER} from './types';
+import {GET_ERRORS, SET_CURRENT_USER} from './types';
 
 export const registerUser = (userData) => dispatch => {
-   axios.post('api/users/register', userData)
+   axios.post('/api/users/register', userData)
      .then(res => console.log(res.data))
      .catch(err => dispatch({
        type: GET_ERRORS,
