@@ -12,7 +12,7 @@ import store from './store';
 export default class App extends Component {
   render() {
     return (
-      <Provider store={}>
+      <Provider store ={}>
       <Router>
         <div className="App">
           <Navbar />
