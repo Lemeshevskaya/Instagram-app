@@ -216,7 +216,7 @@ router.delete(
       })
       .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
   }
-);
+)
 
 
 module.exports = router;
