@@ -1,15 +1,17 @@
-import axios from 'axios';
-import jwt_decode from 'jwt-decode';
+import { SET_ERROR, SET_USER } from "./types";
+import axios from "axios";
 import setAuthToken from '../utils/setAuthToken';
-import {GET_ERRORS, SET_CURRENT_USER} from './types';
+import jwt_decode from 'jwt-decode';
 
 export const registerUser = (userData, history) => dispatch => {
-   axios.post('/api/users/register', userData)
-     .then(res => history.push('/login'))
-     .catch(err => dispatch({
-       type: GET_ERRORS,
-       payload: err.response.data
-     }));
+  axios
+    .post('/api/users/register', userData)
+    .then(res => history.push('/login'))
+    .catch(err => 
+      dispatch({
+        type: SET_ERROR,
+        payload: err.response.data
+      }));
 }
 
 export const loginUser = userData => dispatch => {
@@ -25,24 +27,26 @@ export const loginUser = userData => dispatch => {
       const decoded = jwt_decode(token);
       //Write user info to redux
       dispatch({
-      type: SET_CURRENT_USER,
-      payload: decoded,
-    });
-  })
-  .catch(err =>
-    dispatch({
-    type:GET_ERRORS,
-    payload: err.response.data
-  }));
+        type: SET_USER,
+        payload: decoded,
+      });
+    })
+    .catch((err) =>
+      dispatch({
+        type: SET_ERROR,
+        payload: err.response.data,
+      })
+    );
 }
-export const logoutUser = () => dispatch =>{
-  //remove token from local storage
+
+export const logoutUser = () => dispatch => {
+  //Remove token from ls
   localStorage.removeItem('jwtToken');
-  //remove token from authHeader
+  //Remove token from axios header
   setAuthToken(false);
-  //clear redux store
+  //Reset user in the redux store
   dispatch({
-    type: SET_CURRENT_USER,
-    payload: {}
-  })
-} 
+    type: SET_USER,
+    payload: {},
+  });
+}
