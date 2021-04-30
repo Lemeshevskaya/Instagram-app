@@ -19,6 +19,8 @@ import EditProfile from "./components/edit-profile/EditProfile";
 import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
 import NotFound from "./components/not-found/NotFound";
+import Posts from "./components/posts/Posts";
+import Post from "./components/post/Post";
 
 //check for token in local storage
 if(localStorage.jwtToken){
@@ -74,6 +76,12 @@ class App extends Component {
               component={EditProfile}
             />
           </Switch>
+          <Switch>
+                <PrivateRoute exact path="/feed" component={Posts} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/post/:id" component={Post} />
+              </Switch>
           <Route exact path="/not-found" component={NotFound} />
           <Footer />
         </div>

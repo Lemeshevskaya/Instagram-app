@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import {loginUser} from '../../actions/authActions'; 
 import classnames from 'classnames';
 
@@ -76,6 +77,11 @@ class Login extends Component {
     )
   }
 }
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
+};
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
