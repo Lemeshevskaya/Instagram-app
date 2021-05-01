@@ -9,9 +9,10 @@ class PostForm extends Component {
     super(props);
     this.state = {
       text: '',
+      image: '',
       errors: {}
     };
-
+    this.onChange = this.onChange.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -29,12 +30,14 @@ class PostForm extends Component {
 
     const newPost = {
       text: this.state.text,
+      image: this.state.image,
       name: user.name,
       avatar: user.avatar
     };
 
     this.props.addPost(newPost);
     this.setState({ text: '' });
+    this.setState({ image: '' });
   }
 
   onChange(e) {
@@ -52,11 +55,18 @@ class PostForm extends Component {
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <TextAreaFieldGroup
-                  placeholder="Create a post"
+                  placeholder="Create a text post"
                   name="text"
                   value={this.state.text}
                   onChange={this.onChange}
                   error={errors.text}
+                />
+                <TextAreaFieldGroup
+                  placeholder="Create an image post"
+                  name="image"
+                  value={this.state.image}
+                  onChange={this.onChange}
+                  error={errors.image}
                 />
               </div>
               <button type="submit" className="btn btn-dark">

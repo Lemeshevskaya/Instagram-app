@@ -34,7 +34,7 @@ class PostItem extends Component {
       <div className="card card-body mb-3">
         <div className="row">
           <div className="col-md-2">
-            <Link to="/profile">
+            <Link to="/profiles">
               <img
                 className="rounded-circle d-none d-md-block"
                 src={post.avatar}
@@ -46,6 +46,7 @@ class PostItem extends Component {
           </div>
           <div className="col-md-10">
             <p className="lead">{post.text}</p>
+            <p className="lead">{post.image}</p>
             {showActions ? (
               <span>
                 <button
