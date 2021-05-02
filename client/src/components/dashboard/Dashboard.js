@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 import ProfileActions from './ProfileActions';
+import style from '../../css/profile.css';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -28,18 +29,34 @@ class Dashboard extends Component {
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
           <div>
-            <p className="lead text-muted">
-              Welcome <Link to={`/profile/${profile.username}`}>{user.name}</Link>
-            </p>
-            <ProfileActions />
-            <div style={{ marginBottom: '60px' }} />
-            <button
-              onClick={this.onDeleteClick.bind(this)}
-              className="btn btn-danger"
-            >
-              Delete My Account
-            </button>
-          </div>
+            <div className="row profile_content">
+              <div className="col-4 col-md-3">
+                <img
+                  className="rounded-circle profile_avatar"
+                  src={profile.user.avatar}
+                  alt=""
+                />
+                </div>
+                <div className="col-4 col-md-3">
+                <p className="display-4 text-muted profile_name">
+               <Link to={`/profile/${profile.username}`}>{user.name}</Link>
+               </p>
+               </div>
+               <div className="col-4 col-md-3">
+               <ProfileActions className='profile_button'/>
+                </div>
+                <div className="col-4 col-md-3">
+                <div />
+                <button
+                  onClick={this.onDeleteClick.bind(this)}
+                  className="btn btn-light profile_button"
+                >
+                  Delete My Account
+                </button>
+                </div>
+                </div>
+              </div>
+            
         );
       } else {
         // User is logged in but has no profile
@@ -60,7 +77,7 @@ class Dashboard extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h1 className="display-4">Dashboard</h1>
+              <h1 className="display-4"></h1>
               {dashboardContent}
             </div>
           </div>

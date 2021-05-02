@@ -1,0 +1,22 @@
+.profile_name > a {
+  color: black;
+  text-align: center;
+}
+.profile_avatar{
+  float: left;
+}
+.profile_content{
+  justify-content: space-around;
+  align-items: center;
+}
+.profile_button {
+ 
+  width: 100%;
+}
+.btn-light {
+  background-color: transparent;
+  border: 1px solid rgba(var(--ca6,219,219,219),1);
+  color: rgba(var(--f75,38,38,38),1);
+  border-radius: 4px;
+  font-weight: 600;
+}
