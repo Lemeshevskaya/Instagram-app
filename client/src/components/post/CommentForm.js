@@ -48,7 +48,7 @@ class CommentForm extends Component {
     return (
       <div className="post-form mb-3">
         <div className="card card-info">
-          <div className="card-header bg-info text-white">
+          <div className="card-header bg-light text-black">
             Make a comment...
           </div>
           <div className="card-body">
@@ -62,7 +62,7 @@ class CommentForm extends Component {
                   error={errors.text}
                 />
               </div>
-              <button type="submit" className="btn btn-dark">
+              <button type="submit" className="btn btn-light">
                 Submit
               </button>
             </form>
