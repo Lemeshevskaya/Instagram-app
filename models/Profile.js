@@ -24,7 +24,7 @@ const ProfileSchema = new Schema ({
     type: String
   },
   dateofbirth:{
-    type: Date
+    type: String
   },
  //schema for followers and following.
   following: [
