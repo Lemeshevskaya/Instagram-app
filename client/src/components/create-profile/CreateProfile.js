@@ -74,7 +74,7 @@ class CreateProfile extends Component {
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
-                  placeholder="* Username"
+                  placeholder="* User name"
                   name="username"
                   value={this.state.usernsme}
                   onChange={this.onChange}
@@ -98,7 +98,7 @@ class CreateProfile extends Component {
                   info="Tell us a little about yourself"
                 />
                 <TextFieldGroup
-                  placeholder="Phonenumber"
+                  placeholder="Phone number"
                   name="phonenumber"
                   value={this.state.phonenumber}
                   onChange={this.onChange}
@@ -114,7 +114,8 @@ class CreateProfile extends Component {
                   error={errors.gender}
                 />
                 <TextFieldGroup
-                  placeholder="Dateofbirth"
+                  placeholder="Date of birth"
+                  type="date"
                   name="dateofbirth"
                   value={this.state.dateofbirth}
                   onChange={this.onChange}
