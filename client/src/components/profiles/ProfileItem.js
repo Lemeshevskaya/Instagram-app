@@ -15,7 +15,7 @@ class ProfileItem extends Component {
           </div>
           <div className="col-lg-6 col-md-4 col-8">
             <h3>{profile.user.name}</h3>
-            <Link to={`/profile/${profile.username}`} className="btn btn-info">
+            <Link to={`/profile/${profile.username}`} className="btn btn-info btn_submit">
               View Profile
             </Link>
           </div>
