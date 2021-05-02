@@ -14,9 +14,9 @@
   width: 100%;
 }
 .btn-light {
-  background-color: transparent;
-  border: 1px solid rgba(var(--ca6,219,219,219),1);
-  color: rgba(var(--f75,38,38,38),1);
+  background-color: #f8f9fa;
+  border: 1px solid rgb(202, 202, 202);
+  color: rgba((38,38,38),1);
   border-radius: 4px;
   font-weight: 600;
 }

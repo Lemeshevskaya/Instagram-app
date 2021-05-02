@@ -1,0 +1,39 @@
+.container_main {
+  background-color: white;
+  color: black;
+  width: 400px;
+  height: 400px;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  margin: 80px auto 0;
+
+}
+
+.loading_maintext {
+  font-family: 'Lobster Two', cursive;
+  margin-bottom: 60px;
+}
+div > .landing_button {
+  background-color:#f8f9fa;
+  border: 1px solid rgb(202, 202, 202);
+  width: 40%;
+  
+}
+.form_input > input {
+  background-color:#f8f9fa;
+  border: 1px solid rgb(202, 202, 202);
+}
+.btn_submit {
+  background-color: rgb(169, 203, 248);
+  border-color: transparent;
+  color: white;
+}
+.login_center {
+  margin: 0 auto;
+  width: 90%;
+}
+@media (min-width: 768px){
+.col-md-8 {
+    max-width: 100%;
+  }
+}
