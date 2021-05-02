@@ -46,13 +46,12 @@ class Login extends Component {
     const {errors} = this.state;
     return (
       <div className="login">
-    <div className="container">
+    <div className="container container_main">
       <div className="row">
-        <div className="col-md-8 m-auto">
-          <h1 className="display-4 text-center">Log In</h1>
-          <p className="lead text-center">Sign in to your DevConnector account</p>
+        <div className="col-md-8 text-center login_center">
+          <h1 className="display-3 loading_maintext text-center">Instagram</h1>
           <form noValidate onSubmit = {this.onSubmit.bind(this)}>
-            <div className="form-group">
+            <div className="form-group form_input">
               <input type="email" className={classnames('form-control form-control-lg', {'is-invalid': errors.email})}  placeholder="Email Address" name="email" value = {this.state.email} onChange = {this.onChange.bind(this)} />
               {errors.email && (
                 <div className = "invalid-feedback">
@@ -60,15 +59,15 @@ class Login extends Component {
                 </div>
               )}
             </div>
-            <div className="form-group">
-              <input type="password" className={classnames('form-control form-control-lg', {'is-invalid': errors.password})} placeholder="Password" name="password" value = {this.state.password} onChange = {this.onChange.bind(this)} />
+            <div className="form-group form_input">
+              <input type="password" className={classnames('form-control form-control-lg', {'is-invalid': errors.password})}  placeholder="Password" name="password" value = {this.state.password} onChange = {this.onChange.bind(this)} />
               {errors.password && (
                 <div className = "invalid-feedback">
                   {errors.password}
                 </div>
               )}
             </div>
-            <input type="submit" className="btn btn-info btn-block mt-4" />
+            <input type="submit" className="btn btn-info btn-block mt-4 btn_submit" />
           </form>
         </div>
       </div>
