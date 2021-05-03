@@ -64,7 +64,7 @@ class CreateProfile extends Component {
 
     return (
       <div className="create-profile">
-        <div className="container">
+        <div className="containerm container_profile">
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Create Your Profile</h1>
