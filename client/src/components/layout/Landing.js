@@ -7,7 +7,7 @@ class Landing extends Component {
     return (
       <div className="landing">
     <div className="dark-overlay text-light">
-      <div className="container container_main">
+      <div className="container container_main container-fluid">
         <div className="row">
           <div className="col-md-12 text-center">
             <h1 className="display-3 loading_maintext">Instagram

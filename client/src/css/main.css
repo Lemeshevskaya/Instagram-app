@@ -37,3 +37,8 @@ div > .landing_button {
     max-width: 100%;
   }
 }
+
+.container_profile {
+  height: 800px;
+  margin-bottom: 30px;
+}
