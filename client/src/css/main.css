@@ -8,7 +8,9 @@
   margin: 80px auto 0;
 
 }
-
+.container {
+  margin-bottom: 70px;
+}
 .loading_maintext {
   font-family: 'Lobster Two', cursive;
   margin-bottom: 60px;
