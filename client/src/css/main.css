@@ -42,3 +42,6 @@ div > .landing_button {
   height: 800px;
   margin-bottom: 30px;
 }
+blockquote {
+  width: 300px;
+}
